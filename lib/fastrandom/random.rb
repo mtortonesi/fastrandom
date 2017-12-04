@@ -8,7 +8,8 @@ module FastRandom
       raise ArgumentError, "Seeding not supported (yet)!" unless seed.nil?
 
       @state = ::FFI::MemoryPointer.new(:uint64, 2)
-      @state.write_array_of_uint64([ ::SecureRandom.random_bytes(8).to_i, ::SecureRandom.random_bytes(8).to_i ])
+      u64_array = ::SecureRandom.random_bytes(16).unpack('QQ')
+      @state.write_array_of_uint64(u64_array)
     end
 
     def rand(max = nil)
