@@ -63,6 +63,19 @@ And here are the results with MRI 2.7.1 on the same machine:
     fastrandom   0.919464   0.003296   0.922760 (  0.934760)
     random       0.354044   0.003121   0.357165 (  0.361642)
 
+Finally, here are the results with TruffleRuby 20.1.0 (installed through rbenv)
+on the same machine:
+
+    Rehearsal ----------------------------------------------
+    fastrandom   5.863129   0.022847   5.885976 (  4.281766)
+    random       1.507686   0.003397   1.511083 (  1.018081)
+    ------------------------------------- total: 7.397059sec
+    
+                     user     system      total        real
+    fastrandom   2.870086   0.000061   2.870147 (  2.885172)
+    random       0.770102   0.000004   0.770106 (  0.766706)
+    truffleruby-20.1.0
+
 As you can see, despite leveraging the xoroshiro128+ algorithm, which is deemed
 to be [significantly faster than the old and venerable Mersenne
 Twister](https://nullprogram.com/blog/2017/09/21/) used by the default PRNG of
