@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'fastrandom/random'
+require 'benchmark'
+
+puts ENV["RBENV_VERSION"]
+
+fr = FastRandom::Random.new
+rr = Random.new
+
+# need to disable garbage collector to make proper benchmarks
+GC.disable
+
+Benchmark.bmbm do |x|
+  x.report("fastrandom") { 5_000_000.times { fr.rand } }
+  x.report("random")     { 5_000_000.times { rr.rand } }
+end
+
+# reenable garbage collector
+# GC.disable
